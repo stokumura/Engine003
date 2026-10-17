@@ -1,0 +1,85 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 25,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "linux-debug",
+            "inherits": "base",
+            "displayName": "Linux Debug (Ninja)",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "linux-release",
+            "inherits": "base",
+            "displayName": "Linux Release (Ninja)",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "windows",
+            "displayName": "Windows (Visual Studio 2022)",
+            "generator": "Visual Studio 17 2022",
+            "architecture": {
+                "value": "x64",
+                "strategy": "set"
+            },
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "OFF"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "linux-debug",
+            "configurePreset": "linux-debug"
+        },
+        {
+            "name": "linux-release",
+            "configurePreset": "linux-release"
+        },
+        {
+            "name": "windows-debug",
+            "displayName": "Windows Debug",
+            "configurePreset": "windows",
+            "configuration": "Debug"
+        },
+        {
+            "name": "windows-release",
+            "displayName": "Windows Release",
+            "configurePreset": "windows",
+            "configuration": "Release"
+        }
+    ]
+}
