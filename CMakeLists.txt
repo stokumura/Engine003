@@ -16,6 +16,7 @@ IF(WIN32)
 ENDIF()
 
 FILE(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR})
+FILE(COPY ${CMAKE_SOURCE_DIR}/shaders DESTINATION ${CMAKE_BINARY_DIR})
 
 IF(WIN32)
     FIND_PACKAGE(GLFW3 MODULE REQUIRED)
@@ -33,117 +34,7 @@ TARGET_INCLUDE_DIRECTORIES(GLAD PRIVATE ${CMAKE_SOURCE_DIR}/includes)
 ADD_LIBRARY(STB_IMAGE src/stb_image.cpp)
 TARGET_INCLUDE_DIRECTORIES(STB_IMAGE PRIVATE ${CMAKE_SOURCE_DIR}/includes)
 
-SET(FILE_READER
-    "src/Utils/FileReader/FileReader.h"
-    "src/Utils/FileReader/FileReader.cpp"
-)
-
-SET(DEBUG_SRC
-    "src/Utils/Debug/Debug.h"
-    "src/Utils/Debug/Debug.cpp"
-)
-
-SET(EXECUTABLE_PATH
-    "src/Utils/ExecutablePath/ExecutablePath.h"
-    "src/Utils/ExecutablePath/ExecutablePath.cpp"
-)
-
-SET(LOGGER
-    "src/Utils/Logger/Logger.h"
-    $<$<CONFIG:Debug>:src/Utils/Logger/Logger.cpp>
-)
-
-SET(UTILS 
-    ${FILE_READER}
-    ${DEBUG_SRC}
-    ${EXECUTABLE_PATH}
-    ${LOGGER}
-    "src/Utils/Utils.h"
-)
-
-SET(SHADER
-    "src/Engine/Shader/Shader.h"
-    "src/Engine/Shader/Shader.cpp"
-    "src/Engine/Shader/ShaderProgram.h"
-    "src/Engine/Shader/ShaderProgram.cpp"
-    "src/Engine/Shader/ShaderProgramUniforms.cpp"
-    "src/Engine/Shader/ShaderUniforms.h"
-    "src/Engine/Shader/ShaderUniforms.cpp"
-    "src/Engine/Shader/UniformBlock.h"
-    "src/Engine/Shader/UniformBlock.cpp"
-)
-
-SET(CAMERA
-    "src/Engine/Camera/Camera.h"
-    "src/Engine/Camera/Camera.cpp"
-)
-
-SET(MESH
-    "src/Engine/Mesh/VertexAttribute.h"
-    "src/Engine/Mesh/VertexAttribute.cpp"
-    "src/Engine/Mesh/Mesh.h"
-    "src/Engine/Mesh/Mesh.cpp"
-)
-
-SET(PRIMITIVE
-    "src/Engine/Primitive/Primitive.h"
-    "src/Engine/Primitive/Shape.h"
-    "src/Engine/Primitive/Shape.cpp"
-    "src/Engine/Primitive/Sphere.h"
-    "src/Engine/Primitive/Sphere.cpp"
-    "src/Engine/Primitive/Cylinder.h"
-    "src/Engine/Primitive/Cylinder.cpp"
-    "src/Engine/Primitive/Cube.h"
-    "src/Engine/Primitive/Cube.cpp"
-    "src/Engine/Primitive/Billboard.h"
-    "src/Engine/Primitive/Billboard.cpp"
-)
-
-SET(TEXTURE
-    "src/Engine/Texture/Sampler.h"
-    "src/Engine/Texture/Sampler.cpp"
-    "src/Engine/Texture/Texture.h"
-    "src/Engine/Texture/Texture.cpp"
-)
-
-SET(SHADER_VARIANTS
-    "src/Engine/ShaderVariants/ShaderDefines.h"
-    "src/Engine/ShaderVariants/ShaderDefines.cpp"
-    "src/Engine/ShaderVariants/ShaderVariants.h"
-    "src/Engine/ShaderVariants/ShaderVariants.cpp"
-)
-
-SET(MODEL
-    "src/Engine/Model/Model.h"
-    "src/Engine/Model/Model.cpp"
-)
-
-SET(BILLBOARD_GRASS
-    "src/Engine/BillboardGrass/BillboardGrass.h"
-    "src/Engine/BillboardGrass/BillboardGrass.cpp"
-)
-
-SET(MODERN_GRASS
-    "src/Engine/ModernGrass/ModernGrass.h"
-    "src/Engine/ModernGrass/ModernGrass.cpp"
-)
-
-SET(ENGINE
-    ${SHADER}
-    ${CAMERA}
-    ${MESH}
-    ${PRIMITIVE}
-    ${TEXTURE}
-    ${SHADER_VARIANTS}
-    ${MODEL}
-    ${BILLBOARD_GRASS}
-    ${MODERN_GRASS}
-    "src/Engine/Engine.h"
-)
-
 SET(SOURCE
-    ${UTILS}
-    ${ENGINE}
     "src/main.cpp"
 )
 
